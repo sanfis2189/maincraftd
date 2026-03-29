@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maincraft Prototype</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div id="hud">
+      <div id="status">Connecting...</div>
+      <button id="settings-toggle">Settings</button>
+      <div id="settings-panel" class="hidden">
+        <label for="chunk-distance">Chunk Distance</label>
+        <input id="chunk-distance" type="range" min="3" max="9" step="2" value="3" />
+        <div id="chunk-distance-value">3 chunks</div>
+      </div>
+    </div>
+
+    <div id="chat">
+      <div id="chat-log"></div>
+      <input id="chat-input" placeholder="Type message and press Enter" />
+    </div>
+
+    <div id="inventory" class="hidden">
+      <div id="inventory-header">
+        <div id="inventory-title">Inventory (Creative)</div>
+      </div>
+
+      <div id="inventory-layout">
+        <div id="equipment-panel">
+          <div class="equip-slot" data-slot="helmet">H</div>
+          <div class="equip-slot" data-slot="chest">C</div>
+          <div class="equip-slot" data-slot="legs">L</div>
+          <div class="equip-slot" data-slot="boots">B</div>
+        </div>
+
+        <div id="player-preview">
+          <div id="player-avatar">PLAYER</div>
+          <div id="offhand-slot">OFF</div>
+        </div>
+
+        <div id="crafting">
+          <div id="craft-title">Crafting</div>
+          <div id="craft-grid">
+            <div class="craft-slot" data-slot="0"></div>
+            <div class="craft-slot" data-slot="1"></div>
+            <div class="craft-slot" data-slot="2"></div>
+            <div class="craft-slot" data-slot="3"></div>
+          </div>
+          <div id="craft-output">
+            <div class="craft-slot output"></div>
+          </div>
+          <button id="recipe-book">Recipe Book</button>
+        </div>
+      </div>
+
+      <div id="palette-panel">
+        <div id="palette-title">All Blocks</div>
+        <div id="palette-grid"></div>
+      </div>
+
+      <div id="inventory-grid"></div>
+      <div id="inventory-hotbar"></div>
+      <div id="chest-panel" class="hidden">
+        <div id="chest-title">Chest</div>
+        <div id="chest-grid"></div>
+      </div>
+    </div>
+
+    <div id="hotbar"></div>
+
+    <div id="crosshair"></div>
+    <div id="cursor-item" class="hidden"></div>
+    <div id="break-bar" class="hidden"></div>
+
+    <canvas id="game"></canvas>
+
+    <script type="module" src="/static/game.js"></script>
+  </body>
+</html>

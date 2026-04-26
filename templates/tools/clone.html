@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Game Clone</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">CLONE (2D)</div>
+      <nav class="tools-nav">
+        <a href="/tools/">Tools</a>
+        <a href="/tutorial/">Commands</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>2D mini-clone (обучающий)</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="row">
+              <button id="c-reset" type="button">Reset</button>
+              <button id="c-gen" type="button">Generate</button>
+              <div class="out" id="c-hint">WASD move, Click place, RMB remove</div>
+            </div>
+            <div class="mapbox" style="height: 520px;">
+              <canvas id="c-canvas"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Palette</h3>
+            <div class="row">
+              <button class="c-block" data-col="#7cc36a">grass</button>
+              <button class="c-block" data-col="#8b5a2b">dirt</button>
+              <button class="c-block" data-col="#9ca3af">stone</button>
+              <button class="c-block" data-col="#d3a471">planks</button>
+              <button class="c-block" data-col="#4a79d9">water</button>
+            </div>
+            <div class="muted">Цель: понять цикл рендера, коллизии и сетку.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/clone.js"></script>
+  </body>
+</html>
+

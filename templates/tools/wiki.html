@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recipes Wiki</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">RECIPES WIKI</div>
+      <nav class="tools-nav">
+        <a href="/tools/">Tools</a>
+        <a href="/tutorial/">Commands</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Рецепты крафта (MVP)</h2>
+        <div class="card">
+          <div class="row">
+            <label>Search</label><input id="w-q" type="text" placeholder="torch" style="flex: 1;" />
+            <label>Category</label>
+            <select id="w-cat">
+              <option value="all" selected>all</option>
+              <option value="basic">basic</option>
+              <option value="food">food</option>
+              <option value="tools">tools</option>
+            </select>
+          </div>
+          <div class="out area mono" id="w-list"></div>
+          <div class="muted">Сейчас тут рецепты из нашей игры. Моды можно будет добавить JSON-файлом позже.</div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/wiki.js"></script>
+  </body>
+</html>
+

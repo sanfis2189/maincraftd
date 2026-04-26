@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maincraft Monitor</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">SERVER MONITOR</div>
+      <nav class="tools-nav">
+        <a href="/">Game</a>
+        <a href="/tools/">Tools</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Статус сервера</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="statline">
+              <div class="dot" id="mon-dot"></div>
+              <div>
+                <div class="big" id="mon-state">Loading...</div>
+                <div class="muted" id="mon-sub">/api/status</div>
+              </div>
+            </div>
+            <div class="out big" id="mon-ip">IP: <span class="mono" id="mon-host"></span></div>
+            <div class="row">
+              <button id="mon-refresh" type="button">Refresh</button>
+              <button id="mon-copy" type="button">Copy Host</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Онлайн игроки</h3>
+            <div class="out area" id="mon-players"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel active">
+        <h2>Карта (iframe)</h2>
+        <div class="card">
+          <p class="muted">Если у тебя есть Dynmap/BlueMap URL, вставь сюда.</p>
+          <div class="row">
+            <input id="map-url" type="text" placeholder="https://your-map.example/" />
+            <button id="map-apply" type="button">Apply</button>
+          </div>
+          <div class="mapbox">
+            <iframe id="map-frame" title="Map" loading="lazy"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel active">
+        <h2>Личный кабинет/магазин (заготовка)</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>Вход</h3>
+            <div class="row">
+              <label>Ник</label><input id="shop-user" type="text" placeholder="Player" />
+              <label>Код</label><input id="shop-pass" type="password" placeholder="1234" />
+            </div>
+            <div class="row">
+              <button id="shop-login" type="button">Login (demo)</button>
+              <div class="out" id="shop-balance">Balance: 0</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Покупка (demo)</h3>
+            <div class="row">
+              <label>Item</label>
+              <select id="shop-item">
+                <option value="torch">Torch</option>
+                <option value="bread">Bread</option>
+                <option value="oak_planks">Oak Planks</option>
+              </select>
+              <label>Кол-во</label><input id="shop-qty" type="number" min="1" value="1" />
+              <button id="shop-buy" type="button">Buy</button>
+            </div>
+            <div class="out area" id="shop-log"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/monitor.js"></script>
+  </body>
+</html>
+

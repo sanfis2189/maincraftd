@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Map</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">LIVE MAP</div>
+      <nav class="tools-nav">
+        <a href="/">Game</a>
+        <a href="/tools/">Tools</a>
+        <a href="/panel/">Panel</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Карта мира (chunks + players)</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="row">
+              <button id="lm-connect" type="button">Connect</button>
+              <button id="lm-follow" type="button">Follow: OFF</button>
+              <button id="lm-zoom-in" type="button">Zoom +</button>
+              <button id="lm-zoom-out" type="button">Zoom -</button>
+            </div>
+            <div class="out" id="lm-status">Disconnected</div>
+            <div class="muted">Карта получает игроков через WebSocket (`/ws/game/`).</div>
+          </div>
+          <div class="card">
+            <h3>Легенда</h3>
+            <div class="out area mono" id="lm-legend"></div>
+          </div>
+        </div>
+        <div class="mapbox" style="height: 620px; margin-top: 12px;">
+          <canvas id="lm-canvas"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/live_map.js"></script>
+  </body>
+</html>
+

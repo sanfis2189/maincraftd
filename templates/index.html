@@ -8,13 +8,11 @@
   </head>
   <body>
     <div id="hud">
-      <div id="status">Connecting...</div>
-      <button id="settings-toggle">Settings</button>
-      <div id="settings-panel" class="hidden">
-        <label for="chunk-distance">Chunk Distance</label>
-        <input id="chunk-distance" type="range" min="3" max="9" step="2" value="3" />
-        <div id="chunk-distance-value">3 chunks</div>
+      <div id="title">MAINCRAFT</div>
+      <div id="help">
+        WASD/Arrows move | Space jump/fly | Shift sink | Mouse look | Click break | Right click place | T chat | E inventory | H photo mode
       </div>
+      <div id="status">Connecting...</div>
     </div>
 
     <div id="chat">
@@ -25,6 +23,28 @@
     <div id="inventory" class="hidden">
       <div id="inventory-header">
         <div id="inventory-title">Inventory (Creative)</div>
+      </div>
+      <div id="world-dashboard">
+        <div class="dash-header">World Dashboard</div>
+        <div class="dash-row">
+          <label for="chunk-distance">Chunk Distance</label>
+          <input id="chunk-distance" type="range" min="3" max="9" step="2" value="3" />
+          <div id="chunk-distance-value">3 chunks</div>
+        </div>
+        <div class="dash-lines" id="dash-lines"></div>
+        <div id="dashboard-goals" class="dash-goals"></div>
+        <div class="dash-actions">
+          <button id="btn-photo-mode" type="button">Photo Mode [H]</button>
+          <button id="btn-center-camera" type="button">Center View</button>
+          <button id="btn-toggle-lantern" type="button">Lantern [F]</button>
+          <button id="btn-open-tools" type="button">Tools [P]</button>
+          <button id="btn-open-live-map" type="button">Live Map [L]</button>
+          <button id="btn-open-schem" type="button">Schematic [O]</button>
+          <button id="btn-open-panel" type="button">Panel</button>
+          <button id="btn-open-tutorial" type="button">Tutorial</button>
+          <button id="btn-open-wiki" type="button">Wiki</button>
+          <button id="btn-open-clone" type="button">Clone</button>
+        </div>
       </div>
 
       <div id="inventory-layout">

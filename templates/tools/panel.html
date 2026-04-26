@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Server Panel</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">SERVER PANEL</div>
+      <nav class="tools-nav">
+        <a href="/monitor/">Monitor</a>
+        <a href="/live-map/">Live Map</a>
+        <a href="/tools/">Tools</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Admin</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>Token</h3>
+            <div class="row">
+              <input id="p-token" type="password" value="dev" />
+              <button id="p-save" type="button">Save</button>
+              <div class="muted">Токен в `maincraft/settings.py` (`PANEL_TOKEN`).</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Онлайн</h3>
+            <div class="out big" id="p-online">Loading...</div>
+            <div class="out area mono" id="p-players"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel active">
+        <h2>Действия</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>Broadcast Chat</h3>
+            <div class="row">
+              <label>Name</label><input id="p-name" type="text" value="ADMIN" />
+              <label>Text</label><input id="p-text" type="text" placeholder="message" style="flex: 1;" />
+              <button id="p-send" type="button">Send</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Give Item</h3>
+            <div class="row">
+              <label>Player</label><select id="p-player"></select>
+              <label>BlockType</label><input id="p-block" type="number" value="50" />
+              <label>Count</label><input id="p-count" type="number" value="16" min="1" max="64" />
+              <button id="p-give" type="button">Give</button>
+            </div>
+            <div class="muted">BlockType — числовой id (пример: 50 torch, 1 stone).</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel active">
+        <h2>Время</h2>
+        <div class="card">
+          <div class="row">
+            <label>Speed</label><input id="p-speed" type="number" step="0.5" value="1" />
+            <label>Progress (0..1)</label><input id="p-prog" type="number" step="0.05" value="0.25" />
+            <button id="p-time" type="button">Apply</button>
+          </div>
+          <div class="muted">Это меняет день/ночь у клиентов через WebSocket событие.</div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/panel.js"></script>
+  </body>
+</html>
+

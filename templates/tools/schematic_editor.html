@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Schematic Editor</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">SCHEMATIC EDITOR</div>
+      <nav class="tools-nav">
+        <a href="/tools/">Tools</a>
+        <a href="/live-map/">Live Map</a>
+        <a href="/panel/">Panel</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Редактор схем (2D слои) + экспорт .schematic</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="row">
+              <label>Width</label><input id="se-w" type="number" min="1" max="64" value="16" />
+              <label>Length</label><input id="se-l" type="number" min="1" max="64" value="16" />
+              <label>Height</label><input id="se-h" type="number" min="1" max="32" value="8" />
+              <button id="se-new" type="button">New</button>
+            </div>
+            <div class="row">
+              <label>Layer Y</label><input id="se-y" type="number" min="0" value="0" />
+              <label>Brush</label>
+              <select id="se-block">
+                <option value="air">air</option>
+                <option value="stone" selected>stone</option>
+                <option value="dirt">dirt</option>
+                <option value="grass">grass</option>
+                <option value="cobble">cobble</option>
+                <option value="planks">planks</option>
+                <option value="wood">wood</option>
+                <option value="sand">sand</option>
+                <option value="brick">brick</option>
+                <option value="glass">glass</option>
+                <option value="torch">torch</option>
+                <option value="water">water</option>
+              </select>
+              <button id="se-erase" type="button">Eraser</button>
+            </div>
+            <div class="muted">ЛКМ рисует, Shift+ЛКМ стирает. Слои по Y. Экспорт идёт в классический формат MCEdit `.schematic`.</div>
+          </div>
+          <div class="card">
+            <h3>Экспорт</h3>
+            <div class="row">
+              <label>Name</label><input id="se-name" type="text" value="build" />
+              <button id="se-export-json" type="button">Export JSON</button>
+              <button id="se-export-schem" type="button">Export .schematic</button>
+            </div>
+            <textarea id="se-json" class="out area mono" rows="10" placeholder="JSON export"></textarea>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 12px;">
+          <h3>Grid</h3>
+          <div id="se-grid" class="pixelart"></div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/schematic_editor.js"></script>
+  </body>
+</html>
+

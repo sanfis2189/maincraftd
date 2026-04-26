@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Commands Tutorial</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/tools.css" />
+  </head>
+  <body class="tools">
+    <header class="tools-top">
+      <div class="tools-brand">COMMANDS LAB</div>
+      <nav class="tools-nav">
+        <a href="/tools/">Tools</a>
+        <a href="/wiki/">Wiki</a>
+        <a href="/clone/">Clone</a>
+      </nav>
+    </header>
+
+    <main class="tools-wrap">
+      <section class="panel active">
+        <h2>Интерактивный учебник по командам</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>/give</h3>
+            <div class="row">
+              <label>Target</label><input id="t-give-target" type="text" value="@p" />
+              <label>Item</label><input id="t-give-item" type="text" value="minecraft:torch" />
+              <label>Count</label><input id="t-give-count" type="number" value="16" min="1" max="64" />
+              <button id="t-give-make" type="button">Make</button>
+            </div>
+            <div class="out mono" id="t-give-out"></div>
+          </div>
+          <div class="card">
+            <h3>/time</h3>
+            <div class="row">
+              <label>Preset</label>
+              <select id="t-time-preset">
+                <option value="day">day</option>
+                <option value="noon" selected>noon</option>
+                <option value="night">night</option>
+                <option value="midnight">midnight</option>
+              </select>
+              <button id="t-time-make" type="button">Make</button>
+            </div>
+            <div class="out mono" id="t-time-out"></div>
+            <div class="muted">Для нашего сервера также можно в Panel менять время через WebSocket событие.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel active">
+        <h2>Командный блок (шаблон)</h2>
+        <div class="card">
+          <div class="row">
+            <label>Command</label><input id="t-cmd" type="text" value="/say Hello world" style="flex: 1;" />
+            <button id="t-cb" type="button">Generate</button>
+          </div>
+          <div class="out mono" id="t-cb-out"></div>
+          <div class="muted">Это “шпаргалка” для вставки команды в командный блок.</div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/tutorial.js"></script>
+  </body>
+</html>
+

@@ -1105,7 +1105,89 @@ function loadRemoteTexture(url) {
   return tex;
 }
 
+// Preview renderer cache for small 3D thumbnails used in UI chips.
+const previewCache = new Map();
+let previewRenderer = null;
+let previewScene = null;
+let previewCamera = null;
+
+function ensurePreviewRenderer() {
+  if (previewRenderer) return;
+  const canvas = document.createElement("canvas");
+  canvas.width = 64;
+  canvas.height = 64;
+  previewRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+  previewRenderer.setSize(64, 64);
+  previewScene = new THREE.Scene();
+  previewCamera = new THREE.PerspectiveCamera(50, 1, 0.1, 10);
+  previewCamera.position.set(2, 2, 2);
+  previewCamera.lookAt(0, 0, 0);
+  const amb = new THREE.AmbientLight(0xffffff, 0.6);
+  previewScene.add(amb);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.6);
+  dir.position.set(5, 10, 7);
+  previewScene.add(dir);
+}
+
+function renderBlockPreview(type) {
+  // return cached canvas if available
+  const key = `block:${type}`;
+  if (previewCache.has(key)) return previewCache.get(key);
+  ensurePreviewRenderer();
+
+  // Build a simple cube using the block's face materials (uses fallback textures immediately)
+  const geo = new THREE.BoxGeometry(1, 1, 1);
+  const mats = [
+    getFaceMaterial(type, "side"),
+    getFaceMaterial(type, "side"),
+    getFaceMaterial(type, "top"),
+    getFaceMaterial(type, "bottom"),
+    getFaceMaterial(type, "front"),
+    getFaceMaterial(type, "back"),
+  ];
+  const mesh = new THREE.Mesh(geo, mats);
+  mesh.rotation.y = Math.PI / 4;
+  mesh.rotation.x = -0.35;
+
+  const root = new THREE.Group();
+  root.add(mesh);
+  previewScene.add(root);
+
+  // Render to the preview renderer's canvas, copy into a new canvas for safe caching.
+  previewRenderer.render(previewScene, previewCamera);
+  const out = document.createElement("canvas");
+  out.width = previewRenderer.domElement.width;
+  out.height = previewRenderer.domElement.height;
+  const ctx = out.getContext("2d");
+  ctx.drawImage(previewRenderer.domElement, 0, 0);
+
+  // Cleanup temporary objects from scene
+  previewScene.remove(root);
+  // Cache and return
+  previewCache.set(key, out);
+  return out;
+}
+
 function applyChipTexture(chip, type) {
+  // If this is a placeable block, render a small 3D preview and insert as a canvas
+  if (isPlaceable(type)) {
+    try {
+      const preview = renderBlockPreview(type);
+      chip.style.background = "transparent";
+      chip.innerHTML = "";
+      preview.className = "chip-preview-canvas";
+      preview.style.width = "48px";
+      preview.style.height = "48px";
+      preview.style.imageRendering = "pixelated";
+      chip.appendChild(preview);
+      return;
+    } catch (e) {
+      // Fall back to 2D if WebGL rendering fails
+      console.warn("3D preview failed, falling back to 2D preview", e);
+    }
+  }
+
+  // Fallback: keep original 2D background behavior for items and non-placeable textures
   const textureUrl = getTextureUrl(type, "side");
   if (textureUrl) {
     chip.style.backgroundColor = "transparent";
@@ -1113,9 +1195,11 @@ function applyChipTexture(chip, type) {
     chip.style.backgroundSize = "cover";
     chip.style.backgroundPosition = "center";
     chip.style.imageRendering = "auto";
+    chip.innerHTML = "";
     return;
   }
   chip.style.background = `#${(BLOCK_COLORS[type] || 0xffffff).toString(16).padStart(6, "0")}`;
+  chip.innerHTML = "";
 }
 
 function applySteveAvatar() {
